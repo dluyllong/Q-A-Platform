@@ -1,0 +1,26 @@
+{
+  "name": "Q-A-Platform",
+  "version": "0.0.0",
+  "description": "This is a training project for AngularJs Course",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.0.0"
+  },
+  "devDependencies": {
+    "karma": "^0.12.9"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hoanguyen311/Q-A-Platform.git"
+  },
+  "author": "Hoa Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoanguyen311/Q-A-Platform/issues"
+  },
+  "homepage": "https://github.com/hoanguyen311/Q-A-Platform"
+}

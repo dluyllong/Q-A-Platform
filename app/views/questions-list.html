@@ -1,0 +1,21 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+	    <h3 class="panel-title"><a href="#">Recent</a><a href="#">Popular</a></h3>
+	 </div>
+	<div class="panel-body">
+		
+	</div>
+	<ul class="list-group">
+		<li ng-repeat="question in questions" class="list-group-item">						
+			<blockquote><a href="#/q-details/{{question.id}}">{{question.title}}</a></blockquote>
+			<p ng-show="question.description.length > 0">
+		        {{question.description}}
+		    </p>
+			<span class="glyphicon glyphicon-user"> {{question.user}}</span>
+			<span class="glyphicon glyphicon-calendar pull-right"> {{question.date}}</span><br />
+			<span class="label label-success"> {{question.anwsers}} anwsers</span>
+			<p><span ng-repeat="category in question.categoryIDs">{{ category }}</span></p>
+		</li>	
+	</ul>
+  <div class="panel-footer">Panel footer</div>
+</div>

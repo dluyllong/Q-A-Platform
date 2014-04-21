@@ -1,0 +1,35 @@
+<form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="input1" class="col-sm-2 control-label">Your name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input1" ng-model="newQuestion.user" placeholder="Your name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input2" class="col-sm-2 control-label">Title</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input2" ng-model="newQuestion.title"  placeholder="Title">
+    </div>
+  </div>
+  <div class="form-group">
+  	 <label for="inputEmail2" class="col-sm-2 control-label">Category</label>
+    <div class="col-sm-10">
+      <div>
+        <label class="checkbox-inline" ng-repeat="item in categoryList">
+		  <input type="checkbox" ng-click="selectCategory(item.id)" id="{{item.id}}" value="{{item.id}}"> {{item.name}}
+		</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" rows="3" ng-model="newQuestion.description"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-click="askQuestion()">Add question</button>
+    </div>
+  </div>
+</form>
