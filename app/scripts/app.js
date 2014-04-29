@@ -51,10 +51,9 @@ QAP.controller('MainController', function ($scope, $location, $cookieStore, Ques
 	Categories.query();
 });
 
-QAP.controller('CategoriesListController', function ($scope, Categories, $rootScope) {
+QAP.controller('CategoriesListController', function ($scope, Categories, $rootScope, $routeParams, $location) {
     // Category
     $scope.categoryList = Categories.query();
-
 
    	$rootScope.selectedCategory = '-1';
 

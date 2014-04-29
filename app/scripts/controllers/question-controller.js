@@ -6,6 +6,7 @@ QuestionControllers.controller('QuestionsListController', function($rootScope, $
 	$scope.predicate = 'date';
 
 	if($routeParams.id) {
+		$rootScope.selectedCategory = parseFloat($routeParams.id);
 		$scope.questions = Questions.queryByCategory($routeParams.id);
 		$scope.showCarousel = false;
 	} else {
