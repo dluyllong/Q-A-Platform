@@ -1,0 +1,67 @@
+
+<div data-ng-controller="QuestionsListController" data-ng-show="showCarousel" id="featuredCarousel" class="carousel slide featured-question-carousel" data-ride="carousel">
+  <!-- Indicators -->
+
+  <ol class="carousel-indicators" >
+    <li ng-repeat="question in featuredQuestions" data-target="#featuredCarousel" data-slide-to="{{$index}}" ng-class="{active: $index == 0}"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+
+    <div data-ng-repeat="question in featuredQuestions" class="item" ng-class="
+    {active: $index == 0}">
+        <div class="jumbotron">
+		  <h2 >{{question.title | truncate:10 }}</h2>
+		  <p class="description">{{question.description | truncate:25 }}</p>
+		  <p><a href="#/q-details/{{question.id}}" class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+		</div>
+    </div>
+   
+  </div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading clearfix">
+		<ul class="nav nav-pills pull-left">
+
+			<li data-ng-class="{active: predicate=='date'}">
+				<a href="" data-ng-click="changePredicate('date')" title="Newest">Newest</a>
+			</li>
+
+			<li data-ng-class="{active: predicate=='answers'}">
+				<a href="" data-ng-click="changePredicate('answers')" title="Popular">Popular</a>
+			</li>
+		</ul>
+
+
+	</div>
+	
+	<ul class="list-group question-list">
+		<li data-ng-controller="QuestionsListItemController" data-ng-repeat="question in questions | orderBy: getPredicate: true" class="list-group-item">
+			<blockquote>
+				<a href="#/q-details/{{question.id}}" title="{{question.title}}">{{question.title}}</a>
+			</blockquote>
+		
+			<p class="desc" data-ng-show="question.description.length >
+				0">
+		  
+		        {{question.description | truncate:15}}
+			</p>
+			<div class="clearfix">
+
+				<div class="clearfix">
+					<div class="date pull-right">{{ question.date | smartDateTime }}</div>
+					<div class="author pull-left"><img src="{{askedUser.avatar}}" alt="" width="20" height="20"><strong>{{ askedUser.name }}</strong> &middot; <span>{{ askedUser.point }}</span></div>
+				</div>
+			</div>
+
+			<div class="categories clearfix">
+				<div class="pull-right"><span data-ng-class="statusLabelClass" class="label">{{answersLength}} anwsers</span></div>
+				<div class="tags"><a href="#/category/{{category.id}}" ng-click="changeCategory(category.id)" title="{{ category.name }}" data-ng-repeat="category in categories" class="label label-warning">{{ category.name }}</a></div>
+			</div>
+		</li>
+	</ul>
+	<div class="panel-footer">
+
+	</div>
+</div>

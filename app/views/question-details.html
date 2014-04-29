@@ -1,0 +1,48 @@
+<div id="questionPage">
+
+	<a href="#/">Back to list</a>
+
+	<div id="questionDetail" class="media">
+		<div class="media-body">
+			<h1 class="media-heading">{{ question.title }}</h1>
+			<blockquote><div class="detail">{{ question.description }}</div></blockquote>
+			<div class="tags"><a href="#/category/{{category.id}}" title="{{ category.name }}" class="label label-warning" data-ng-repeat="category in categories">{{ category.name }}</a></div>
+			<div class="date pull-right">asked <span smarttime="question"></span><!--{{ question.date | smartDateTime }}--></div>
+			<div class="author pull-left"><img src="{{questionOwner.avatar}}" alt="" width="20" height="20"><strong>{{ questionOwner.name }}</strong> <span>{{ questionOwner.point }}</span></div>
+		</div>
+	</div><!--/questionDetail-->
+
+	<fieldset id="commentArea" data-ng-controller="AddAnswerController">
+		<div class="form-group">
+			<label>Your Answer</label>
+			<textarea class="form-control" rows="3" data-ng-model="newAnswerContent"></textarea>
+		</div>
+		<div class="form-group clearfix">
+			<div class="pull-right">
+				<button data-ng-click="addAnswer()" class="btn btn-primary">Send Answer</button>
+				<button data-ng-click="resetAnswer()" class="btn btn-primary">Reset</button>
+			</div>
+		</div>
+	</fieldset><!--/commentArea-->
+
+	<div id="answersArea" class="media-list">
+		<h3>Answers</h3>
+		<div class="answer clearfix media" data-ng-controller="AnswerItemController" data-ng-repeat="answer in answersForThis | orderBy:['-point','-date']" data-id="{{ answer.id }}">
+
+			<div class="pull-left" data-ng-class="{disabled: !rateAvai()}">
+				<div data-ng-click="rate(1)" class="like"></div>
+				<div class="point" data-ng-class="{danger: answer.point < 0}">{{ answer.point }}</div>
+				<div data-ng-click="rate(-1)" class="dislike"></div>
+			</div>
+
+			<div class="media-body">
+				<div class="answer-content">{{ answer.content }}</div><!--{{ answer.date | smartDateTime }}-->
+				<div class="date pull-right">answered <span smarttime="answer"></span></div>
+				<div class="author pull-left"><img src="{{answerUser.avatar}}" alt="" width="20" height="20"><strong>{{ answerUser.name }}</strong> &middot; <span>{{ answerUser.point }}</span></div>
+			</div>
+			
+			<hr />
+		</div>
+	</div><!--/answersArea-->
+
+</div>
