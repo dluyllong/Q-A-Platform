@@ -101,3 +101,7 @@ h1 a:hover {
 .carousel-indicators .active {
 	background-color: #428BCA
 }
+
+.mb-none {
+	margin-bottom: 0px;
+}

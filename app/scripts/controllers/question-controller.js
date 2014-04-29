@@ -21,6 +21,15 @@ QuestionControllers.controller('QuestionsListController', function($rootScope, $
 	$scope.changePredicate = function(newPredicate) {
 		$scope.predicate = newPredicate;
 	};
+
+	$scope.isEmpty = function(){
+		if($scope.questions.length) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 });
 
 // HANDLE QUESTION ITEM IN LIST

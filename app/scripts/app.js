@@ -60,7 +60,7 @@ QAP.controller('CategoriesListController', function ($scope, Categories, $rootSc
 
    	$scope.selectCategory = function(id) {
    		$rootScope.selectedCategory = id;
-   	}
+   	}   	
 });
 
 QAP.controller('UserController', function ($scope, Users, $rootScope) {

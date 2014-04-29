@@ -1,5 +1,5 @@
 
-<div data-ng-controller="QuestionsListController" data-ng-show="showCarousel" id="featuredCarousel" class="carousel slide featured-question-carousel" data-ride="carousel">
+<div data-ng-controller="QuestionsListController" data-ng-if="showCarousel" id="featuredCarousel" class="carousel slide featured-question-carousel" data-ride="carousel">
   <!-- Indicators -->
 
   <ol class="carousel-indicators" >
@@ -21,7 +21,7 @@
   </div>
 </div>
 <div class="panel panel-default">
-	<div class="panel-heading clearfix">
+	<div class="panel-heading clearfix"  ng-if="isEmpty()">
 		<ul class="nav nav-pills pull-left">
 
 			<li data-ng-class="{active: predicate=='date'}">
@@ -36,7 +36,7 @@
 
 	</div>
 	
-	<ul class="list-group question-list">
+	<ul class="list-group question-list"  ng-if="isEmpty()">
 		<li data-ng-controller="QuestionsListItemController" data-ng-repeat="question in questions | orderBy: getPredicate: true" class="list-group-item">
 			<blockquote>
 				<a href="#/q-details/{{question.id}}" title="{{question.title}}">{{question.title}}</a>
@@ -61,7 +61,10 @@
 			</div>
 		</li>
 	</ul>
-	<div class="panel-footer">
+
+	<p class="alert alert-danger mb-none" ng-if="!isEmpty()">There isn't question</p>
+
+	<div class="panel-footer"  ng-if="isEmpty()">
 
 	</div>
 </div>
