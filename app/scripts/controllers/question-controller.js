@@ -1,7 +1,7 @@
 var QuestionControllers = angular.module('QAP.QuestionControllers', ['QAP.services','QAP.filters','ngCookies','QAP.directives', 'ngRoute']);
 
 // RENDER QUESTION LIST
-QuestionControllers.controller('QuestionsListController', function($rootScope, $scope, Questions, Categories, $routeParams, Answers) {
+QuestionControllers.controller('QuestionsListController', function($rootScope, $scope, Users, Questions, Categories, $routeParams, Answers) {
 	$scope.showCarousel = true;
 	$scope.predicate = 'date';
 
@@ -100,6 +100,5 @@ QuestionControllers.controller('QuestionDetailsController', function($scope, $fi
 	$scope.questionOwner = Users.getUserById($scope.question.userID);
 	$scope.categories = Categories.getCategoriesByIDs($scope.question.categoryIDs);
 	$scope.answersForThis = Answers.getAnswersByQuestionId($scope.questionId);
-
 });
 

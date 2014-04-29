@@ -9,12 +9,13 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
 
-    <div data-ng-repeat="question in featuredQuestions" class="item" ng-class="
+    <div data-ng-controller="QuestionsListItemController" data-ng-repeat="question in featuredQuestions" class="item" ng-class="
     {active: $index == 0}">
         <div class="jumbotron">
-		  <h2 >{{question.title | truncate:10 }}</h2>
-		  <p class="description">{{question.description | truncate:25 }}</p>
-		  <p><a href="#/q-details/{{question.id}}" class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+			<h2 >{{question.title | truncate:10 }}</h2>
+			<p class="description">{{question.description | truncate:25 }}</p>
+			<br><span data-ng-class="statusLabelClass" class="label">{{answersLength}} anwsers</span><br><br>
+			<p><a href="#/q-details/{{question.id}}" class="btn btn-primary btn-lg" role="button">Learn more</a></p>
 		</div>
     </div>
    

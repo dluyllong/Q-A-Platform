@@ -1,4 +1,4 @@
-var QAP = angular.module('QAP', ['ngRoute', 'QAP.QuestionControllers', 'QAP.AnswersControllers','ngCookies']);
+var QAP = angular.module('QAP', ['ngRoute', 'QAP.QuestionControllers', 'QAP.AnswersControllers', 'ngCookies']);
 
 function QAPRouteConfig($routeProvider) {
 	$routeProvider
