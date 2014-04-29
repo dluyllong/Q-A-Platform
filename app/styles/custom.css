@@ -109,7 +109,7 @@ h1 a:hover {
 	background: url(../images/icon-back.jpg) no-repeat right top;
 	padding: 10px 42px 11px ;
 	cursor: pointer;
-	display: block;
+	display: none;
 	float: left;
 	margin-right: 5px;
 }
