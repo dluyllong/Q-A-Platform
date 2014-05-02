@@ -8,7 +8,6 @@ QuestionControllers.controller('QuestionsListController', function($rootScope, $
 		$scope.questions = Questions.queryByCategory($routeParams.id);
 		$scope.showCarousel = false;
 	} else if ( $location.search() ) {
-		console.log($location.search()[QAP.searchType]);
 		$scope.questions = Questions.queryByKey(QAP.searchType, $location.search()[QAP.searchType]);
 		$scope.showCarousel = false;
 	} else {
