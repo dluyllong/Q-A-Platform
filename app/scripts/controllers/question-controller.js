@@ -67,6 +67,7 @@ QuestionControllers.controller('AskQuestionController', function($scope, $filter
 	$scope.logined = Users.getCurrentUser();
 	
 	$scope.askQuestion = function () {
+		if ( $scope.selectedCategories.length < 1 || !$scope.newQuestion.description || !$scope.newQuestion.title ) return false;
 		$scope.newQuestion.categoryIDs = $scope.selectedCategories;
 		var currentDate = $filter('date')(new Date(), 'yyyy-MM-ddThh:mm:ssZ');
 		$scope.newQuestion.date = currentDate;
