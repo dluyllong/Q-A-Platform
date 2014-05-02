@@ -44,7 +44,7 @@ Monday, May 02 of 2014
 <ul>
 	<li>Developing UI clean and friendly with user (based on Bootstrap)</li>
 	<li>Data: use static data and put them into services</li>
-	<li>Login/Authentication :using one of accounts hoa.nguyen, tuyet.le, long.nguyen, tuyen.cao, thao.duong with password is username</li>
+	<li>Login/Authentication :using one of accounts hoa.nguyen, tuyet.le, long.nguyen, tuyen.cao, thao.duong with password is 12345 for all</li>
 	<li>Show question list:
 		<ul>
 			<li>On homepage: all questions with featured questions on slider</li>
