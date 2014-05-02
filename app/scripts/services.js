@@ -49,7 +49,7 @@ ServicesModule.factory('Users',function ($cookieStore, $rootScope) {
 	var Users = {
 		query: function () {
 			if ( $cookieStore.get(QAP.cookies.users) ) {
-				data = $cookieStore.get(QAP.cookies.users);
+				//data = $cookieStore.get(QAP.cookies.users);
 			}
 			
 			return data;
@@ -88,7 +88,7 @@ ServicesModule.factory('Users',function ($cookieStore, $rootScope) {
 			return currentUser;
 		},
 		rememberLoggedin: function() {
-			$cookieStore.put(QAP.cookies.currentUser,currentUser);
+			//$cookieStore.put(QAP.cookies.currentUser,currentUser);
 		}
 	};
 	return Users;
@@ -187,14 +187,13 @@ ServicesModule.factory('Questions',function($cookieStore) {
 	
 	var Questions = {
 		query: function() {
-
 			if ( $cookieStore.get(QAP.cookies.questions) ) {
-				data = $cookieStore.get(QAP.cookies.questions);
+				//data = $cookieStore.get(QAP.cookies.questions);
 			}
 			return data;
 		},
 		askQuestion: function(question) {
-			_.extend(question, {id: data.length + 1, answers: 0});
+			_.extend(question, {id: data.length + 1});
 			var result = data.push(question);
 			this.save();
 			return result; //return the length of data
@@ -235,7 +234,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
    			return null;
 		},
 		save: function () {
-			$cookieStore.put(QAP.cookies.questions,data);
+			//$cookieStore.put(QAP.cookies.questions,data);
 		}
 	}
 	return Questions;
@@ -256,7 +255,7 @@ ServicesModule.factory('Categories', function($cookieStore) {
    	var Categories = {
    		query: function() {
 			if ( $cookieStore.get(QAP.cookies.categories) ) {
-				data = $cookieStore.get(QAP.cookies.categories);
+				//data = $cookieStore.get(QAP.cookies.categories);
 			}
    			return data;
    		},
@@ -276,7 +275,7 @@ ServicesModule.factory('Categories', function($cookieStore) {
 			this.save();
 		},
 		save: function () {
-			$cookieStore.put(QAP.cookies.categories,data);
+			//$cookieStore.put(QAP.cookies.categories,data);
 		}
    	};
 	return Categories;
@@ -456,7 +455,7 @@ ServicesModule.factory('Answers', function($cookieStore) {
 	var Answers = {
 		query: function() {
 			if ( $cookieStore.get(QAP.cookies.answers) ) {
-				data = $cookieStore.get(QAP.cookies.answers);
+				//data = $cookieStore.get(QAP.cookies.answers);
 			}
 			return data;
 		},
@@ -494,7 +493,7 @@ ServicesModule.factory('Answers', function($cookieStore) {
 			return result;
 		},
 		save: function () {
-			$cookieStore.put(QAP.cookies.answers,data);
+			//$cookieStore.put(QAP.cookies.answers,data);
 		}
 	};
 	return Answers;

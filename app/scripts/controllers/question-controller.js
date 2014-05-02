@@ -82,6 +82,7 @@ QuestionControllers.controller('AskQuestionController', function($scope, $filter
 			description: null,
 			userID: $rootScope.rootCurrentUser.id,
 			date: null,
+			featured: false,
 			categoryIDs: []
 		};
 		
