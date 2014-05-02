@@ -207,6 +207,15 @@ ServicesModule.factory('Questions',function($cookieStore) {
 
 			return arrayResult;
 		},
+		queryByKey: function(type, key){
+		
+			var lowerType = type.toLowerCase(),
+				arrayResult = _.filter(data, function (q) { 
+				return q[lowerType].toLowerCase().indexOf(key) != -1 
+			});
+
+			return arrayResult;
+		},
 		getFeaturedQuestions: function() {
 			var arrayResult = _.filter(data, function(q){ 
 				return q.featured;

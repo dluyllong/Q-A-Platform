@@ -77,15 +77,25 @@
 					</div>
 					
 				</div>
-
-<!-- 				  <button type="button" class="btn btn-block btn-default dropdown-toggle" data-toggle="dropdown">
-					<img src="{{currentUser.avatar}}" alt="" width="20" height="20"> {{currentUser.name}} <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" role="menu">
-					<li data-ng-repeat="user in users"><a href="javascript:void(0)" data-ng-click="login(user.id)"><img src="{{user.avatar}}" alt="" width="20" height="20"> {{user.name}}</a></li>
-				  </ul> -->
-				  
 				
+			</div>
+			
+			<div class="pull-right">
+				<br>
+				<div class="input-group" id="search" data-ng-controller="QuestionSearchController">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="type">Title</span> <span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a ng-click="changeType('Title')">Title</a></li>
+							<li class="divider"></li>
+							<li><a ng-click="changeType('Description')">Description</a></li>
+						</ul>
+					</div><!-- /btn-group -->
+					<input type="text" class="form-control" ng-model="keyWord">
+					<span class="input-group-btn">
+						<a href="#/search?{{searchType}}={{keyWord}}" class="btn btn-default glyphicon glyphicon-search" type="button"></a>
+					</span>
+				</div><!-- /input-group -->
 			</div>
 		  </div>
 		</nav>

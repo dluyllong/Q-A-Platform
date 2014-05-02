@@ -18,6 +18,10 @@ function QAPRouteConfig($routeProvider) {
 		controller: 'AskQuestionController',
 		templateUrl: 'views/ask-question.html'
 	})
+	.when('/search', {
+		controller: 'QuestionsListController',
+		templateUrl: 'views/questions-list.html'
+	})
 	.otherwise({
 		redirectTo: '/'
 	});
@@ -31,6 +35,7 @@ QAP.cookies = {
 	'categories': 'categories',
 	'currentUser': 'currentUser'
 };
+QAP.searchType = 'title',
 
 QAP.controller('MainController', function ($scope, $location, $cookieStore, Questions, Answers, Users, Categories) {
 	$scope.askQuestionPath = '#/ask-question';

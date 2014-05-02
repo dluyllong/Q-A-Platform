@@ -38,6 +38,7 @@ Directives.directive('myBackToTop', function() {
       link: link
     };
 });
+
 window.onscroll = function (event) {
 	var heightWindow = $(window).height();
 	
@@ -47,4 +48,4 @@ window.onscroll = function (event) {
 	else{
 		$('.btn-back-to-top').css('display','none')
 	}
-}
+};

@@ -1,5 +1,4 @@
-
-<div data-ng-controller="QuestionsListController" data-ng-show="showCarousel" id="featuredCarousel" class="carousel slide featured-question-carousel" data-ride="carousel">
+<div data-ng-show="showCarousel" id="featuredCarousel" class="carousel slide featured-question-carousel" data-ride="carousel" data-ng-if="hasQuestion">
   <!-- Indicators -->
 
   <ol class="carousel-indicators" >
@@ -21,7 +20,8 @@
    
   </div>
 </div>
-<div class="panel panel-default">
+
+<div class="panel panel-default" data-ng-if="hasQuestion">
 	<div class="panel-heading clearfix">
 		<ul class="nav nav-pills pull-left">
 
@@ -66,3 +66,5 @@
 
 	</div>
 </div>
+
+<div data-ng-if="!hasQuestion"><h1>Please ask a question</h1></div>
