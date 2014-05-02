@@ -27,7 +27,7 @@ h1 a:hover {
 #questionPage{padding:0 0 50px}
 #questionPage hr{clear:both}
 
-#questionPage .author{padding-left:0;clear:both;padding-bottom:10px}
+#questionPage .author{padding-left:0;padding-bottom:10px}
 #questionPage .author strong{color:#4a6b82}
 #questionPage .author span{color:#444;margin-left:5px}
 #questionPage .date{text-align:right;color:#999;padding-right:0;padding-bottom:10px}
@@ -106,10 +106,16 @@ h1 a:hover {
 	margin-bottom: 0px;
 }
 .btn-back-to-top{
-	background: url(../images/icon-back.jpg) no-repeat right top;
-	padding: 10px 42px 11px ;
-	cursor: pointer;
-	display: none;
-	float: left;
-	margin-right: 5px;
+	background: url(../images/icon-back.jpg);
+	width:37px;
+	height:37px;
+	position:fixed;
+	bottom:20px;
+	right:20px;
+	z-index:99;
+	cursor:pointer;
+	display:none;
 }
+
+#search{width:350px;margin-right:10px}
+#search .glyphicon-search{top:0;padding-top:9px;padding-bottom:9px}

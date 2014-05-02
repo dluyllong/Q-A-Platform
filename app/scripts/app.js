@@ -1,4 +1,4 @@
-var QAP = angular.module('QAP', ['ngRoute', 'QAP.QuestionControllers', 'QAP.AnswersControllers','ngCookies']);
+var QAP = angular.module('QAP', ['ngRoute', 'QAP.QuestionControllers', 'QAP.AnswersControllers', 'ngCookies']);
 
 function QAPRouteConfig($routeProvider) {
 	$routeProvider
@@ -18,19 +18,24 @@ function QAPRouteConfig($routeProvider) {
 		controller: 'AskQuestionController',
 		templateUrl: 'views/ask-question.html'
 	})
+	.when('/search', {
+		controller: 'QuestionsListController',
+		templateUrl: 'views/questions-list.html'
+	})
 	.otherwise({
 		redirectTo: '/'
 	});
 }
 
 QAP.config(QAPRouteConfig);
-QAP.currentUserId = 5;
 QAP.cookies = {
 	'answers': 'answers',
 	'users': 'users',
 	'questions': 'questions',
-	'categories': 'categories'
+	'categories': 'categories',
+	'currentUser': 'currentUser'
 };
+QAP.searchType = 'title',
 
 QAP.controller('MainController', function ($scope, $location, $cookieStore, Questions, Answers, Users, Categories) {
 	$scope.askQuestionPath = '#/ask-question';
@@ -66,19 +71,21 @@ QAP.controller('UserController', function ($scope, Users, $rootScope) {
 	$scope.currentUser = null;
 
 	$scope.logined = function() {
-		$scope.currentUser = Users.getCurrentUser()
+		$scope.currentUser = Users.getCurrentUser();
 		return $scope.currentUser == undefined ? false : true;
-	} 
+	};
+	
 	$scope.logout = function() {
 		Users.logout();
-	}
+		$rootScope.$broadcast('logout', []);
+	};
 });
 
 QAP.controller('LoginController', function($scope, Users, $rootScope) {
 
 	$scope.loginSuccessfull = false;
 	$scope.loginClicked = false;
-	$scope.loginUser = null;
+	$scope.loginUser = Users.loadCurrentUser();
 
 	$scope.login = function() {
 		if ($scope.loginForm.$valid) {
@@ -87,10 +94,15 @@ QAP.controller('LoginController', function($scope, Users, $rootScope) {
 			if (user) {			
 				$scope.loginSuccessfull = true;
 				angular.element('#modal-login').modal('hide');
+				$rootScope.$broadcast('login', []);
 			} else {
 				$scope.loginSuccessfull = false;
 			}
 		}
-	}
+	};
+	
+	$scope.$on('loginRequest', function(event, mass) {
+		angular.element('#modal-login').modal('show')
+	});
 
 });

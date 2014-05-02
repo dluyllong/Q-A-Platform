@@ -6,6 +6,7 @@ ServicesModule.factory('Users',function ($cookieStore, $rootScope) {
 			id: 1,
 			username: 'hoa.nguyen',
 			name: 'Hòa',
+			password: '123456',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://en.gravatar.com/userimage/64610499/b11591d3d3ff1d572c3cb15f2722e234.jpg?size=200',
 			point: 754
@@ -13,6 +14,7 @@ ServicesModule.factory('Users',function ($cookieStore, $rootScope) {
 			id: 2,
 			username: 'tuyet.le',
 			name: 'Tuyết',
+			password: '123456',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://m.essentialbaby.com.au/forums/public/style_emoticons/default/biggrin.png',
 			point: 812
@@ -20,6 +22,7 @@ ServicesModule.factory('Users',function ($cookieStore, $rootScope) {
 			id: 3,
 			username: 'tuyen.cao',
 			name: 'Tuyến',
+			password: '123456',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://www.essentialbaby.com.au/forums/style_emoticons/default/glare.gif',
 			point: 813
@@ -27,6 +30,7 @@ ServicesModule.factory('Users',function ($cookieStore, $rootScope) {
 			id: 4,
 			username: 'thao.duong',
 			name: 'Thảo',
+			password: '123456',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://community.babycenter.com/js/tinymce_3_5_6/plugins/smileys/img/smiley-yell.gif',
 			point: 566
@@ -34,6 +38,7 @@ ServicesModule.factory('Users',function ($cookieStore, $rootScope) {
 			id: 5,
 			username: 'long.nguyen',
 			name: 'Long',
+			password: '123456',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://community.babycenter.com/js/tinymce_3_2_5/plugins/smileys/img/smiley-cool.gif',
 			point: 235
@@ -44,8 +49,9 @@ ServicesModule.factory('Users',function ($cookieStore, $rootScope) {
 	var Users = {
 		query: function () {
 			if ( $cookieStore.get(QAP.cookies.users) ) {
-				data = $cookieStore.get(QAP.cookies.users);
+				//data = $cookieStore.get(QAP.cookies.users);
 			}
+			
 			return data;
 		},
 		getUserById: function (id) {
@@ -54,22 +60,35 @@ ServicesModule.factory('Users',function ($cookieStore, $rootScope) {
 		save: function () {
 			$cookieStore.put(QAP.cookies.users,data);
 		},
+		loadCurrentUser: function () {
+			if ( $cookieStore.get(QAP.cookies.currentUser) ) {
+				currentUser = $cookieStore.get(QAP.cookies.currentUser);
+				$rootScope.rootCurrentUser = currentUser;
+				return currentUser;
+			} else {
+				return null;
+			}
+		},
 		login: function(loginUser) {
 			//temp
 			var user = _.find(data, function(u) {
-				return u.username == loginUser.username && u.username == loginUser.password;
+				return u.username == loginUser.username && u.password == loginUser.password;
 			});
 
 			currentUser = user;
 			$rootScope.rootCurrentUser = user;
-
+			this.rememberLoggedin();
 			return user; //undefined or user object
 		},
 		logout: function() {
-			currentUser = null;
+			$rootScope.rootCurrentUser = currentUser = null;
+			this.rememberLoggedin();
 		},
 		getCurrentUser: function() {
 			return currentUser;
+		},
+		rememberLoggedin: function() {
+			//$cookieStore.put(QAP.cookies.currentUser,currentUser);
 		}
 	};
 	return Users;
@@ -156,8 +175,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		featured: true,
 		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [5,10,9]
-	},
-	{
+	}, {
 		id: 20,
 		title: 'Test',
 		description: 'I have read all of The Walking Dead comics online so far. But I want to start getting a copy and reading them.',
@@ -169,14 +187,13 @@ ServicesModule.factory('Questions',function($cookieStore) {
 	
 	var Questions = {
 		query: function() {
-
 			if ( $cookieStore.get(QAP.cookies.questions) ) {
-				data = $cookieStore.get(QAP.cookies.questions);
+				//data = $cookieStore.get(QAP.cookies.questions);
 			}
 			return data;
 		},
 		askQuestion: function(question) {
-			_.extend(question, {id: data.length + 1, answers: 0});
+			_.extend(question, {id: data.length + 1});
 			var result = data.push(question);
 			this.save();
 			return result; //return the length of data
@@ -185,6 +202,15 @@ ServicesModule.factory('Questions',function($cookieStore) {
 
 			var arrayResult = _.filter(data, function(q){ 
 				return q.categoryIDs.indexOf(parseInt(id)) != -1 
+			});
+
+			return arrayResult;
+		},
+		queryByKey: function(type, key){
+		
+			var lowerType = type.toLowerCase(),
+				arrayResult = _.filter(data, function (q) { 
+				return q[lowerType].toLowerCase().indexOf(key) != -1 
 			});
 
 			return arrayResult;
@@ -208,7 +234,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
    			return null;
 		},
 		save: function () {
-			$cookieStore.put(QAP.cookies.questions,data);
+			//$cookieStore.put(QAP.cookies.questions,data);
 		}
 	}
 	return Questions;
@@ -229,7 +255,7 @@ ServicesModule.factory('Categories', function($cookieStore) {
    	var Categories = {
    		query: function() {
 			if ( $cookieStore.get(QAP.cookies.categories) ) {
-				data = $cookieStore.get(QAP.cookies.categories);
+				//data = $cookieStore.get(QAP.cookies.categories);
 			}
    			return data;
    		},
@@ -249,7 +275,7 @@ ServicesModule.factory('Categories', function($cookieStore) {
 			this.save();
 		},
 		save: function () {
-			$cookieStore.put(QAP.cookies.categories,data);
+			//$cookieStore.put(QAP.cookies.categories,data);
 		}
    	};
 	return Categories;
@@ -429,7 +455,7 @@ ServicesModule.factory('Answers', function($cookieStore) {
 	var Answers = {
 		query: function() {
 			if ( $cookieStore.get(QAP.cookies.answers) ) {
-				data = $cookieStore.get(QAP.cookies.answers);
+				//data = $cookieStore.get(QAP.cookies.answers);
 			}
 			return data;
 		},
@@ -467,7 +493,7 @@ ServicesModule.factory('Answers', function($cookieStore) {
 			return result;
 		},
 		save: function () {
-			$cookieStore.put(QAP.cookies.answers,data);
+			//$cookieStore.put(QAP.cookies.answers,data);
 		}
 	};
 	return Answers;

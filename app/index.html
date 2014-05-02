@@ -49,18 +49,17 @@
 			<div class="pull-right">
 				<br>
 				<div ng-controller="UserController">
-					<a my-back-to-top class="btn-back-to-top">Back to top</a>
+					<a my-back-to-top class="btn-back-to-top"></a>
 					<button class="btn btn-danger" data-ng-click="clearCookies()">
 						Clear all Cookies
 						<span class="glyphicon glyphicon glyphicon glyphicon-exclamation-sign"></span>
 					</button>
+					<a data-ng-href="{{askQuestionPath }}" title="Ask a question" class="btn btn-success" style="padding-bottom: 7px">
+						Ask a question
+						<span class="glyphicon glyphicon-question-sign"></span>
+					</a>
 					<button ng-if="!logined()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-login">Login</button>
 					<div class="btn-group" ng-if="logined()">
-
-						<a data-ng-href="{{askQuestionPath }}" title="Ask a question" class="btn btn-default" style="padding-bottom: 7px">
-							Ask a question
-							<span class="glyphicon glyphicon-question-sign"></span>
-						</a>
 						<div class="btn-group">
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 								<img src="{{currentUser.avatar}}" alt="" width="20" height="20">
@@ -77,18 +76,26 @@
 						</div>
 					</div>
 					
-				</div>			
+				</div>
 				
-				
-
-<!-- 				  <button type="button" class="btn btn-block btn-default dropdown-toggle" data-toggle="dropdown">
-					<img src="{{currentUser.avatar}}" alt="" width="20" height="20"> {{currentUser.name}} <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" role="menu">
-					<li data-ng-repeat="user in users"><a href="javascript:void(0)" data-ng-click="login(user.id)"><img src="{{user.avatar}}" alt="" width="20" height="20"> {{user.name}}</a></li>
-				  </ul> -->
-				  
-				
+			</div>
+			
+			<div class="pull-right">
+				<br>
+				<div class="input-group" id="search" data-ng-controller="QuestionSearchController">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="type">Title</span> <span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a ng-click="changeType('Title')">Title</a></li>
+							<li class="divider"></li>
+							<li><a ng-click="changeType('Description')">Description</a></li>
+						</ul>
+					</div><!-- /btn-group -->
+					<input type="text" class="form-control" ng-model="keyWord" ng-enter>
+					<span class="input-group-btn">
+						<a href="#/search?{{searchType}}={{keyWord}}" id="btn-search" class="btn btn-default glyphicon glyphicon-search" type="button"></a>
+					</span>
+				</div><!-- /input-group -->
 			</div>
 		  </div>
 		</nav>
@@ -140,7 +147,7 @@
 			  <div class="alert alert-danger" ng-show="!loginSuccessfull && loginClicked">
 			  	Wrong username or password
 			  </div>
-			  <div class="form-group">
+			  <!--<div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">
 			      <div class="checkbox">
 			        <label>
@@ -148,10 +155,10 @@
 			        </label>
 			      </div>
 			    </div>
-			  </div>
+			  </div>-->
 			  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="input"  data-ng-click="login()" class="btn btn-primary">Sign in</button>
+			      <button type="input" data-ng-click="login()" class="btn btn-primary">Sign in</button>
 			    </div>
 			  </div>
 			</form>

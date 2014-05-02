@@ -30,25 +30,33 @@ AnswersControllers.controller('AnswerItemController', function ($rootScope, $sco
 
 // ADD YOUR ANSWER
 AnswersControllers.controller('AddAnswerController', function($rootScope, $scope, $filter, Answers, Users, $routeParams) {
-
-
 	$scope.questionId = $routeParams.id;
 	$scope.newAnswerContent = null;
 	
 	$scope.addAnswer = function () {
-		$scope.newAnswer = {
-			'id': null,
-			'date': null,
-			'userID': $rootScope.rootCurrentUser.id,
-			'content': null,
-			'point': 0,
-			'ratedBy': []
-		};
-		var currentDate = $filter('date')(new Date(), 'yyyy-MM-ddThh:mm:ssZ');
-		$scope.newAnswer.date = currentDate;
-		$scope.newAnswer.content = $scope.newAnswerContent;
-		$scope.newAnswerContent = '';
-		Answers.insertAnswer($scope.questionId, $scope.newAnswer);
+		
+		if ( $rootScope.rootCurrentUser ) {
+		
+			$scope.newAnswer = {
+				'id': null,
+				'date': null,
+				'userID': $rootScope.rootCurrentUser.id,
+				'content': null,
+				'point': 0,
+				'ratedBy': []
+			};
+			var currentDate = $filter('date')(new Date(), 'yyyy-MM-ddThh:mm:ssZ');
+			$scope.newAnswer.date = currentDate;
+			$scope.newAnswer.content = $scope.newAnswerContent;
+			$scope.newAnswerContent = '';
+			Answers.insertAnswer($scope.questionId, $scope.newAnswer);
+			
+		} else {
+			
+			$rootScope.$broadcast('loginRequest', []);
+		
+		}
+		
 		return false;
 	};
 	

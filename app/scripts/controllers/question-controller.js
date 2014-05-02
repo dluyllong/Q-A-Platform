@@ -1,36 +1,53 @@
 var QuestionControllers = angular.module('QAP.QuestionControllers', ['QAP.services','QAP.filters','ngCookies','QAP.directives', 'ngRoute']);
 
 // RENDER QUESTION LIST
-QuestionControllers.controller('QuestionsListController', function($rootScope, $scope, Questions, Categories, $routeParams, Answers) {
+QuestionControllers.controller('QuestionsListController', function($rootScope, $scope, Users, Questions, Categories, $routeParams, Answers, $location) {
 	$scope.showCarousel = true;
 	$scope.predicate = 'date';
-
-	if($routeParams.id) {
-		$rootScope.selectedCategory = parseFloat($routeParams.id);
+	if ( $routeParams.id ) {
 		$scope.questions = Questions.queryByCategory($routeParams.id);
+		$scope.showCarousel = false;
+	} else if ( $location.$$path == '/search' ) {
+		$scope.questions = Questions.queryByKey(QAP.searchType, $location.search()[QAP.searchType]);
+		$rootScope.selectedCategory = '-1';
 		$scope.showCarousel = false;
 	} else {
 		$rootScope.selectedCategory = '-1';
 		$scope.questions = Questions.query();
 	}
-
-	$scope.featuredQuestions = Questions.getFeaturedQuestions();
-	angular.element('#featuredCarousel').carousel({interval: 3000});
-	$scope.getPredicate = function(q) {
-		return $scope.predicate == 'date' ? q.date : Answers.getAnswersLengthByQuestionId(q.id);
-	};
-	$scope.changePredicate = function(newPredicate) {
-		$scope.predicate = newPredicate;
-	};
-
-	$scope.isEmpty = function(){
-		if($scope.questions.length) {
-			return true;
-		} else {
-			return false;
-		}
+	
+	if ($scope.questions.length < 1) {
+	
+		$scope.hasQuestion = false;
 		
+	} else {
+	
+		$scope.hasQuestion = true;
+		
+		$scope.featuredQuestions = Questions.getFeaturedQuestions();
+		angular.element('#featuredCarousel').carousel({interval: 3000});
+		$scope.getPredicate = function(q) {
+			return $scope.predicate == 'date' ? q.date : Answers.getAnswersLengthByQuestionId(q.id);
+		};
+		$scope.changePredicate = function(newPredicate) {
+			$scope.predicate = newPredicate;
+		};
 	}
+	
+});
+
+// SEARCH QUESTION
+QuestionControllers.controller('QuestionSearchController', function($rootScope, $scope, Questions, $routeParams, $location) {
+	$scope.searchType = QAP.searchType;
+	$scope.changeType = function (e) {
+		$scope.searchType = QAP.searchType = e.toLowerCase();
+		angular.element('#search .type').text(e);
+	};
+	
+	$scope.search = function () {
+		angular.element('#btn-search').trigger('click');
+	};
+	
 });
 
 // HANDLE QUESTION ITEM IN LIST
@@ -46,28 +63,8 @@ QuestionControllers.controller('QuestionsListItemController', function($scope, A
 
 // CREATE NEW QUESTION
 QuestionControllers.controller('AskQuestionController', function($scope, $filter, $location, $rootScope, Questions, Categories, Users) {
-
-
-	$scope.newQuestion = {
-		id: null,
-		title: null,
-		description: null,
-		userID: $rootScope.rootCurrentUser.id,
-		date: null,
-		categoryIDs: []
-	};
 	
-	$scope.selectedCategories = [];
-	$scope.categoryList = Categories.query();
-
-	$scope.selectCategory = function(item) {
-		var idx = $scope.selectedCategories.indexOf(item);
-		if (idx > -1) {
-			$scope.selectedCategories.splice(idx, 1);
-	  	} else {
-			$scope.selectedCategories.push(item);
-	    }
-	};
+	$scope.logined = Users.getCurrentUser();
 	
 	$scope.askQuestion = function () {
 		$scope.newQuestion.categoryIDs = $scope.selectedCategories;
@@ -77,6 +74,51 @@ QuestionControllers.controller('AskQuestionController', function($scope, $filter
 		Categories.change($scope.newQuestion.categoryIDs);
 		$location.path("#/");
 	};
+	
+	$scope.renderAskQuestionView = function () {
+		$scope.newQuestion = {
+			id: null,
+			title: null,
+			description: null,
+			userID: $rootScope.rootCurrentUser.id,
+			date: null,
+			featured: false,
+			categoryIDs: []
+		};
+		
+		$scope.selectedCategories = [];
+		$scope.categoryList = Categories.query();
+
+		$scope.selectCategory = function(item) {
+			var idx = $scope.selectedCategories.indexOf(item);
+			if (idx > -1) {
+				$scope.selectedCategories.splice(idx, 1);
+			} else {
+				$scope.selectedCategories.push(item);
+			}
+		};
+	};
+		
+	if ( $scope.logined ) {
+		
+		$scope.renderAskQuestionView();
+		
+	} else {
+		
+		$rootScope.$broadcast('loginRequest', []);
+	
+	}
+	
+	$scope.$on('logout', function(event, mass) {
+		$scope.logined = null;
+		$location.path("#/");
+	});
+	
+	$scope.$on('login', function(event, mass) {
+		$scope.renderAskQuestionView();
+		$scope.logined = Users.getCurrentUser();
+	});
+	
 });
 
 // QUESTION DETAIL
@@ -86,6 +128,5 @@ QuestionControllers.controller('QuestionDetailsController', function($scope, $fi
 	$scope.questionOwner = Users.getUserById($scope.question.userID);
 	$scope.categories = Categories.getCategoriesByIDs($scope.question.categoryIDs);
 	$scope.answersForThis = Answers.getAnswersByQuestionId($scope.questionId);
-
 });
 

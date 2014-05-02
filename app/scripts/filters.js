@@ -2,6 +2,8 @@ var filters = angular.module('QAP.filters', []);
 
 filters.filter('truncate', function() {
 	return function(input, limit) {
+		
+		if ( !input ) { return ""; }
 		var finalText = "";
 		var words = input.replace(/\s+/g, ' ').split(' ');
 		var numberOfWords = words.length;
