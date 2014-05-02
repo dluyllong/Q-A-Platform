@@ -91,9 +91,9 @@
 							<li><a ng-click="changeType('Description')">Description</a></li>
 						</ul>
 					</div><!-- /btn-group -->
-					<input type="text" class="form-control" ng-model="keyWord">
+					<input type="text" class="form-control" ng-model="keyWord" ng-enter>
 					<span class="input-group-btn">
-						<a href="#/search?{{searchType}}={{keyWord}}" class="btn btn-default glyphicon glyphicon-search" type="button"></a>
+						<a href="#/search?{{searchType}}={{keyWord}}" id="btn-search" class="btn btn-default glyphicon glyphicon-search" type="button"></a>
 					</span>
 				</div><!-- /input-group -->
 			</div>

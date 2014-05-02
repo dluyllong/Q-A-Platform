@@ -43,6 +43,11 @@ QuestionControllers.controller('QuestionSearchController', function($rootScope, 
 		$scope.searchType = QAP.searchType = e.toLowerCase();
 		angular.element('#search .type').text(e);
 	};
+	
+	$scope.search = function () {
+		angular.element('#btn-search').trigger('click');
+	};
+	
 });
 
 // HANDLE QUESTION ITEM IN LIST

@@ -39,6 +39,20 @@ Directives.directive('myBackToTop', function() {
     };
 });
 
+Directives.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+					scope.search();
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
+
 window.onscroll = function (event) {
 	var heightWindow = $(window).height();
 	
