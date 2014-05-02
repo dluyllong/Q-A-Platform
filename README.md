@@ -42,7 +42,7 @@ Monday, May 02 of 2014
 <h2>DETAILS REQUIREMENTS</h2>
 
 <ul>
-	<li>Developing UI clean and friendly with user (based on Bootstrap)</li>
+	<li>Developing UI clean and friendly with user (based on Bootstrap): <b>All</b></li>
 	<li>Data: use static data and put them into services</li>
 	<li>Login/Authentication :using one of accounts hoa.nguyen, tuyet.le, long.nguyen, tuyen.cao, thao.duong with password is 12345 for all</li>
 	<li>Show question list:
@@ -56,4 +56,47 @@ Monday, May 02 of 2014
 	<li>Interact with question when showing details (like, share on social network (optional)...)</li>
 	<li>Group all questions to categories (1 question may belongs to many category). Show all categories</li>
 	<li>Vote for answers: user can vote for an answer if this answer doesn't belong to him and he never voted for this answers</li>
+</ul>
+
+<h2>TASK OWNER</h2>
+
+<h3>Hoa Nguyen</h3>
+
+<ul>
+	<li>Choosing idea, design app's features, UI, UX </li>
+	<li>Implementing app's sleketon ,data structures, routing</li>
+	<li>Delelop UI on begining of this project</li>
+	<li>Assign tasks and support members</li>
+	<li>Improve code and fix bugs for whole project</li>
+	<li>Sorting question</li>
+</ul>
+
+<h3>Tuyet Le</h3>
+
+<ul>
+	<li>Truncate text filter</li>
+	<li>Showing featured questions on carousel</li>
+	<li>Back to top button using directive</li>
+	<li>List all categories on left sidebar</li>
+</ul>
+
+<h3>Long Nguyen</h3>
+
+<ul>
+	<li>Develop UI, UX, data, app's features</li>
+	<li>Question details, add answers for question, voting answers</li>
+	<li>Search question</li>
+	<li>Improve code and fix bugs for whole project</li>
+</ul>
+
+<h3>Tuyen Cao</h3>
+
+<ul>
+	<li>List all questions</li>
+</ul>
+
+<h3>Thao Duong</h3>	
+
+<ul>
+	<li>Ask question</li>
 </ul>
