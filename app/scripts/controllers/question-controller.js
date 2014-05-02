@@ -7,7 +7,7 @@ QuestionControllers.controller('QuestionsListController', function($rootScope, $
 	if ( $routeParams.id ) {
 		$scope.questions = Questions.queryByCategory($routeParams.id);
 		$scope.showCarousel = false;
-	} else if ( $location.search() ) {
+	} else if ( $location.$$path == '/search' ) {
 		$scope.questions = Questions.queryByKey(QAP.searchType, $location.search()[QAP.searchType]);
 		$rootScope.selectedCategory = '-1';
 		$scope.showCarousel = false;
@@ -43,12 +43,6 @@ QuestionControllers.controller('QuestionSearchController', function($rootScope, 
 		$scope.searchType = QAP.searchType = e.toLowerCase();
 		angular.element('#search .type').text(e);
 	};
-	/*
-	$scope.search = function () {
-		 $location.search('name','Freewind').path('/search')
-	};
-	*/
-	
 });
 
 // HANDLE QUESTION ITEM IN LIST
