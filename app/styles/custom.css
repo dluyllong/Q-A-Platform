@@ -110,4 +110,5 @@ h1 a:hover {
 	right:20px;
 	z-index:99;
 	cursor:pointer;
+	display:none;
 }
