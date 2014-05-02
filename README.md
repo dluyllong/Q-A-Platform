@@ -44,10 +44,10 @@ Monday, May 02 of 2014
 <ul>
 	<li>Developing UI clean and friendly with user (based on Bootstrap)</li>
 	<li>Data (discussing)</li>
-	<li>Login/Authentication (simple)</li>
+	<li>Login/Authentication :using one of accounts hoa.nguyen, tuyet.le, long.nguyen, tuyen.cao, thao.duong with password is username</li>
 	<li>List all questions on index view (paging)</li>
 	<li>Show details of 1 question and its answers, and related questions</li>
 	<li>Interact with question when showing details (like, share on social network (optional)...)</li>
 	<li>Group all questions to categories (1 question may belongs to many category). Show all categories</li>
-	<li>Search questions, advanced search (optional)</li>
+	<li>Vote for answers: user can vote for an answer if this answer doesn't belong to him and he never voted for this answers</li>
 </ul>
