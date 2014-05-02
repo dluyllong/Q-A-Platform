@@ -9,6 +9,7 @@ QuestionControllers.controller('QuestionsListController', function($rootScope, $
 		$scope.showCarousel = false;
 	} else if ( $location.search() ) {
 		$scope.questions = Questions.queryByKey(QAP.searchType, $location.search()[QAP.searchType]);
+		$rootScope.selectedCategory = '-1';
 		$scope.showCarousel = false;
 	} else {
 		$rootScope.selectedCategory = '-1';
@@ -40,7 +41,6 @@ QuestionControllers.controller('QuestionSearchController', function($rootScope, 
 	$scope.searchType = QAP.searchType;
 	$scope.changeType = function (e) {
 		$scope.searchType = QAP.searchType = e.toLowerCase();
-		$scope
 		angular.element('#search .type').text(e);
 	};
 	/*
